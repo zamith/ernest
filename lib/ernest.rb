@@ -11,11 +11,13 @@ module Ernest
     end
 
     def call
-      HTTParty.post(
+      response = HTTParty.post(
         ENV['API_ENDPOINT'],
         body: post,
         headers: { 'Authorization' => 'Token token="' + ENV['TOKEN'] + '"' }
       )
+
+      puts response unless response.code == 200
     end
 
     private
