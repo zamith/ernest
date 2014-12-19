@@ -44,7 +44,7 @@ After you've set those variables, write your post in plain old markdown, adding 
 When you're done with the writing, create a draft:
 
 ```
-$ bundle exec ernest post-name.markdown
+$ ernest post-name.markdown
 ```
 
 ## Contributing
