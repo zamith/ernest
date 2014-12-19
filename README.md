@@ -39,7 +39,7 @@ TOKEN="a-random-token"
 
 To make this super easy, Ernest comes bundled with `dotenv`, which means that you can add these variables to a file called `.env` and place it wherever you want to create your drafts from (e.g. a `~/posts` directory).
 
-After you've set those variables, write your post in plain old markdown, adding any extra fields you want to send to the server as metadata. See an example [here](/examples/post-1.markdown).
+After you've set those variables, write your post in plain old markdown, adding any extra fields you want to send to the server as metadata. See an example [here](/examples/post-1.markdown.example).
 
 When you're done with the writing, create a draft:
 
