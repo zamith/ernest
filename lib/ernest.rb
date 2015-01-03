@@ -1,39 +1,26 @@
 require 'ernest/version'
-require 'httparty'
-require 'metadown'
-require 'dotenv'
-Dotenv.load
+require 'ernest/post'
+require 'ernest/update_post_id'
 
 module Ernest
   class CreatesDrafts
-    def initialize(file_path)
+    def initialize(file_path, response_handler = UpdatePostId, post_class = Post)
       @file_path = file_path
+      @response_handler = response_handler
+      @post_class = post_class
     end
 
     def call
-      response = HTTParty.post(
-        ENV['API_ENDPOINT'],
-        body: post,
-        headers: { 'Authorization' => 'Token token="' + ENV['TOKEN'] + '"' }
-      )
-
-      puts response unless response.code == 200
+      response = post.save
+      response_handler.after_saving_post(response, post).call
     end
 
     private
 
-    attr_reader :file_path
+    attr_reader :file_path, :response_handler, :post_class
 
     def post
-      {
-        post: {
-          body: data.output
-        }.merge(data.metadata)
-      }
-    end
-
-    def data
-      @_data ||= Metadown.render(File.open(file_path, 'rb').read)
+      @_post ||= post_class.parse_from_file(file_path)
     end
   end
 end
