@@ -24,6 +24,8 @@ module Ernest
     def update_post_id
       if new_post_id
         post.update_id(new_post_id)
+      else
+        puts did_not_receive_id_error_message
       end
     end
 
@@ -33,6 +35,14 @@ module Ernest
 
     def everything_ok?
       response.code == 200
+    end
+
+    def did_not_receive_id_error_message
+      <<-ERR_MSG.gsub(/^ {8}/, '').gsub("\n", '')
+        The server did not respond with an id,
+        therefore I will not be able to update this post
+        in the next run, unless you add it manually.
+      ERR_MSG
     end
   end
 end
