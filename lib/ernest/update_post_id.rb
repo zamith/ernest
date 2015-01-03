@@ -22,7 +22,13 @@ module Ernest
     attr_reader :response, :post
 
     def update_post_id
-      post.update_id(response.parsed_response["id"])
+      if new_post_id
+        post.update_id(new_post_id)
+      end
+    end
+
+    def new_post_id
+      response.parsed_response["id"]
     end
 
     def everything_ok?

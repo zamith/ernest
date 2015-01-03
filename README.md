@@ -47,6 +47,25 @@ When you're done with the writing, create a draft:
 $ ernest post-name.markdown
 ```
 
+### Updates
+
+If you already have a post created and want to update it, you just need to add
+its id to the metadata:
+
+```markdown
+---
+id: 28
+title: "A title"
+---
+
+... Rest of post ...
+```
+
+Now just call ernest again and it will do a `PUT` instead of a `POST`.
+
+If you create your post with ernest, it will add the id for you (the server must
+respond with the post id upon creation).
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/ernest/fork )
